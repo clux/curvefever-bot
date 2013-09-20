@@ -94,7 +94,7 @@ module.exports = function (gu) {
 
   gu.handle(/^end/, function (say) {
     // TODO: could scrape for last result?
-    say('game over - refreshing stats');
+    say('game over' + (added.length ? ' - refreshing stats' : ''));
     curve.refresh(added, function () {});
     added = [];
     limit = 6;
