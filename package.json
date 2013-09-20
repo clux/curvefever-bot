@@ -1,0 +1,31 @@
+{
+  "name": "curvefever-bot",
+  "description": "A curvefever signup and match making bot for your chat channel",
+  "author": "Eirik Albrigtsen <analsandblaster@gmail.com>",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/clux/curvefever-bot.git"
+  },
+  "keywords": [],
+  "main": "curve.js",
+  "scripts": {
+    "start": "node irc.js",
+    "test": "tap test/*.js"
+  },
+  "dependencies": {
+    "curvefever-stats": "~0.0.1",
+    "gu": "~0.1.0",
+    "confortable": "~0.2.1"
+  },
+  "optionalDependencies": {
+    "irc-stream": "~0.0.1"
+  },
+  "devDependencies": {
+    "tap": "~0.4.4"
+  },
+  "bugs": {
+    "url": "http://github.com/clux/curvefever-bot/issues"
+  },
+  "license": "MIT"
+}
