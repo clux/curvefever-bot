@@ -8,7 +8,7 @@
     "url": "git://github.com/clux/curvefever-bot.git"
   },
   "keywords": [],
-  "main": "curve.js",
+  "main": "curve-gu.js",
   "scripts": {
     "start": "node irc.js",
     "test": "tap test/*.js"

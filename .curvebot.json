@@ -1,42 +1,45 @@
 {
-  "name": "curve",
-  "server": "irc.rd.tandberg.com",
-  "chan": "#mario",
-  "room": "langley:telepresence",
-  "admins": ["ea", "ob"],
-  "cache": {
-    "aliases": {
-      "ea": "ealbrigt",
-      "lutomlin": "lutomlin",
-      "uu": "usmate",
-      "ianp": "irp",
-      "jobrandh": "jobrandh",
-      "joe_and": "jose-panda",
-      "tjw": "tjw",
-      "aj": "andyj",
-      "jamie": "jammie",
-      "eah": "ealbrigt",
-      "sa": "salbrigt",
-      "aa": "aatukora",
-      "ob": "obone",
-      "rgd": "rgd9999",
-      "Christina": "Criffer"
-    },
-    "scores": {
-      "ealbrigt": 1434,
-      "lutomlin": 1266,
-      "usmate": 990,
-      "irp": 1117,
-      "jobrandh": 1286,
-      "tjw": 993,
-      "andyj": 1262,
-      "jammie": 950,
-      "aatukora": 976,
-      "jose-panda": 883,
-      "obone": 1441,
-      "rgd9999": 829,
-      "Criffer": 858,
-      "salbrigt": 1115
-    }
+ "name": "curve",
+ "server": "irc.quakenet.org",
+ "chan": "#curveblah",
+ "room": "langley:telepresence",
+ "admins": [
+  "ea",
+  "ob"
+ ],
+ "cache": {
+  "aliases": {
+   "ea": "ealbrigt",
+   "lutomlin": "lutomlin",
+   "uu": "usmate",
+   "ianp": "irp",
+   "jobrandh": "jobrandh",
+   "joe_and": "jose-panda",
+   "tjw": "tjw",
+   "aj": "andyj",
+   "jamie": "jammie",
+   "eah": "ealbrigt",
+   "sa": "salbrigt",
+   "aa": "aatukora",
+   "ob": "obone",
+   "rgd": "rgd9999",
+   "Christina": "Criffer"
+  },
+  "scores": {
+   "ealbrigt": 1434,
+   "lutomlin": 1266,
+   "usmate": 990,
+   "irp": 1117,
+   "jobrandh": 1286,
+   "tjw": 993,
+   "andyj": 1262,
+   "jammie": 950,
+   "aatukora": 976,
+   "jose-panda": 883,
+   "obone": 1441,
+   "rgd9999": 829,
+   "Criffer": 858,
+   "salbrigt": 1115
   }
+ }
 }

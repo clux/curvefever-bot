@@ -2,18 +2,16 @@ var cfgPath = require('confortable')('.curvebot.json', process.cwd())
   , cfg = require(cfgPath)
   , link = 'http://curvefever.com/play2.php'
   , room = cfg.room
+  , fs = require('fs')
   , admins = cfg.admins || [];
 
 var saveFn = function (res) {
   cfg.cache = JSON.parse(res);
-  var newVal = JSON.stringify(cfg, null, "");
-  console.log('saveFn with', newVal);  
-  //fs.writeFile(cfgPath, JSON.stringify(cfg, null, ""));
+  fs.writeFile(cfgPath, JSON.stringify(cfg, null, " "));
 };
 var curve = require('curvefever-stats')(cfg.cache, saveFn);
 
 var queryHandlers = function (gu) {
-
   gu.handle(/^register (\w*) (\w*)$/, function (alias, curveName, say, name) {
     if (!admins.length || admins.indexOf(name) >= 0) {
       curve.addPlayer(alias, curveName);
@@ -76,10 +74,10 @@ var queryHandlers = function (gu) {
     'buzz' : 'displays the names of all registered players',
     'where': 'displays the curvefever url + room:password',
     'code' : 'displays the url of the code that powers this bot',
-    'help' : 'displays the available help entries or a specific one'
+    'help' : 'this is the help for help'
   };
   gu.handle(/^help(\s\w*)?/, function (cmd, say) {
-    cmd = cmd.toLowerCase().trim();
+    cmd = (cmd || "").toLowerCase().trim();
     if (cmd && cmds[cmd]) {
       say(cmds[cmd]);
     }
@@ -88,9 +86,7 @@ var queryHandlers = function (gu) {
       say('Available help entries: ' + cmdNames);
     }
   });
-
 };
-
 
 var signupHandlers = function (gu) {
   var joinReg, leaveReg;
@@ -179,11 +175,9 @@ var signupHandlers = function (gu) {
     added = [];
     limit = 6;
   });
-
 };
 
 module.exports = function (gu) {
   queryHandlers(gu);
   signupHandlers(gu);
 };
-
