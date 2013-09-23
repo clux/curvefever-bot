@@ -50,7 +50,7 @@ var queryHandlers = function (gu) {
     num = Math.max(Math.min(num | 0, 3), 1);
     aliases = aliases.trim().split(" ");
     var res = curve.fairestMatch(aliases);
-    if ('string' === typeof res) {
+    if ('string' === typeof res) { // TODO: ditto
       say(res); // error message
     }
     else {
@@ -144,7 +144,7 @@ var signupHandlers = function (gu) {
       say('curve game starting - ' + added.join(', ') + ' - Go go go!');
       if (added.length >= 4) {
         var res = curve.fairestMatch(added);
-        if ('string' === typeof res) {
+        if ('string' === typeof res) { // TODO: string as error..
           say('Not generating teams: ' + res);
         }
         else {
@@ -169,9 +169,61 @@ var signupHandlers = function (gu) {
   });
 
   gu.handle(/^end/, function (say) {
-    // TODO: could scrape for last result?
-    say('game over' + (added.length ? ' - refreshing stats' : ''));
-    curve.refresh(added, function () {});
+    say('game over' + (added.length > 1 ? ' - refreshing stats' : ''));
+    if (added.length > 1) {
+      curve.refresh(added, function () {});
+      curve.getLastMatch(added, function (err, scrs) {
+        if (err) {
+          return console.error(err);
+        }
+        //console.log('getLastMatch returned:', scrs);
+        var isTeam = !!scrs[0].teamScore; // not set in FFAs
+        if (!isTeam) {
+          var margin = scrs[0].score - scrs[1].score;
+          var tbLen = scrs[0].score - (scrs.length-1)*10;
+          var tbStr = (tbLen > 0) ?
+            ' after ' + tbLen + ' points of tiebreakers':
+            '';
+          say(scrs[0].name + ' won with a ' + margin + ' point margin' + tbStr);
+        }
+        else {
+          // isTeam
+          // scrs sorted by winning team, then by individual score within teams
+          var wScore = scrs[0].teamScore;
+          var lScore = scrs[scrs.length-1].teamScore;
+          var winners = scrs.filter(function (s) {
+            return s.teamScore === wScore;
+          });
+          var losers = scrs.filter(function (s) {
+            return s.teamScore === lScore;
+          });
+          var wNames = winners.map(function (s) {
+            return s.name;
+          });
+          var lNames = losers.map(function (s) {
+            return s.name;
+          });
+          var wSum = winners.reduce(function (acc, s) {
+            return acc + s.score;
+          }, 0);
+          var lSum = losers.reduce(function (acc, s) {
+            return acc + s.score;
+          }, 0);
+          var wTeam = wNames.join(',') + ' [' + wScore + ' (' + wSum + ')]';
+          var lTeam = lNames.join(',') + ' [' + lScore + ' (' + lSum + ')]';
+
+          var resStr = wTeam + ' >> ' + lTeam;
+          say(resStr);
+        }
+        scrs.sort(function (x, y) {
+          return Math.abs(Number(y.rankChange)) - Math.abs(Number(x.rankChange));
+        });
+        if (scrs[0].rankChange !== '0') {
+          var maxChange = scrs[0].name + ' with ' + scrs[0].rankChange + 'p';
+          say('Biggest rank shift: ' + maxChange);
+        }
+      });
+    }
     added = [];
     limit = 6;
   });
