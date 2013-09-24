@@ -1,12 +1,15 @@
 {
  "name": "curve",
- "server": "irc.quakenet.org",
- "chan": "#testchan",
+ "server": "irc.rd.tandberg.com",
+ "chan": "#mario",
  "room": "roomname:pass",
- "admins": [],
+ "admins": ["ea"],
  "cache": {
   "aliases": {
-   "clux": "ealbrigt"
+   "ea": "ealbrigt",
+   "uu": "usmate",
+   "aj": "andyj",
+   "aa": "aatukora"
   }
  }
 }
