@@ -1,15 +1,23 @@
 {
  "name": "curve",
- "server": "irc.rd.tandberg.com",
- "chan": "#mario",
+ "server": "irc.freenode.net",
+ "chan": "#curvechan",
  "room": "roomname:pass",
- "admins": ["ea"],
+ "admins": [
+  "clux"
+ ],
  "cache": {
   "aliases": {
-   "ea": "ealbrigt",
+   "clux": "ealbrigt",
    "uu": "usmate",
    "aj": "andyj",
    "aa": "aatukora"
+  },
+  "scores": {
+   "aatukora": 958,
+   "usmate": 991,
+   "andyj": 1262,
+   "ealbrigt": 1471
   }
  }
 }
