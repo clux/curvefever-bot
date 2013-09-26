@@ -112,13 +112,13 @@ var signupHandlers = function (gu) {
 
   gu.handle(joinReg, function (sentiment, participant, say, name) {
     var guy = participant || name;
-    if (added.length === limit) {
-      var hint = limit < 8 ? ' - say "limit 8" to raise the limit' : '';
-      say('game is full' + hint);
-      return;
-    }
     if (added.indexOf(guy) >= 0) {
       return; // no double signups
+    }
+    if (added.length === limit) {
+      var hint = limit < 8 ? ' - say "limit n" to change the limit' : '';
+      say('game is full' + hint);
+      return;
     }
     added.push(guy);
     if (added.length === 1) {
@@ -181,7 +181,8 @@ var signupHandlers = function (gu) {
         if (!isTeam) {
           var margin = scrs[0].score - scrs[1].score;
           var tbLen = scrs[0].score - (scrs.length-1)*10;
-          var tbStr = (tbLen > 0) ?
+          var wasTb = (tbLen > 0 && scrs[1].score >= (scrs.length-1)*10);
+          var tbStr = wasTb ?
             ' after ' + tbLen + ' points of tiebreakers':
             '';
           say(scrs[0].name + ' won with a ' + margin + ' point margin' + tbStr);
