@@ -10,6 +10,8 @@ var ircStream = require('irc-stream')(cfg.server, cfg.name, {
   realName: 'curvefever bot',
   debug: false,
   channels: [cfg.chan]
+}, {
+  announcerMode: true
 });
 
 var curve = require('./');

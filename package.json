@@ -19,7 +19,7 @@
     "confortable": "~0.2.1"
   },
   "optionalDependencies": {
-    "irc-stream": "~0.0.1"
+    "irc-stream": "~0.0.2"
   },
   "devDependencies": {
     "tap": "~0.4.4"
