@@ -2,7 +2,7 @@
   "name": "curvefever-bot",
   "description": "A curvefever signup and match making bot for your chat channel",
   "author": "Eirik Albrigtsen <analsandblaster@gmail.com>",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "clux/curvefever-bot"
