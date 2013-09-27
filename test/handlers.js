@@ -42,6 +42,7 @@ test("signups", function (t) {
     {user: '#chan:clux', name: 'clux', message: 'limit 5'},
     {user: '#chan:jo', name: 'jo', message: 'fine'},
     {user: '#chan:phil', name: 'phil', message: 'ok for ob'},
+    // NB: "end" will trigger a HTTP GET, but we won't wait for its results
     {user: '#chan:ob', name: 'ob', message: 'end'},
     {user: '#chan:ob', name: 'ob', message: 'ja'}
   ];

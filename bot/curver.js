@@ -12,12 +12,12 @@ var saveFn = function (res) {
 var curve = require('curvefever-stats')(cfg.cache, saveFn);
 
 var queryHandlers = function (gu) {
-  gu.handle(/^register (\w*) (\w*)$/, function (alias, curveName, say, name) {
+  gu.handle(/^register (\w*) (\w*)$/, function (say, alias, curveName, name) {
     if (!admins.length || admins.indexOf(name) >= 0) {
       curve.addPlayer(alias, curveName);
     }
   });
-  gu.handle(/^unregister (\w*)/, function (alias, say, name) {
+  gu.handle(/^unregister (\w*)/, function (say, alias, name) {
     if (!admins.length || admins.indexOf(name) >= 0) {
       curve.removePlayer(alias);
     }
@@ -27,7 +27,7 @@ var queryHandlers = function (gu) {
     say(curve.getPlayers().join(' '));
   });
 
-  gu.handle(/^check (.*)$/, function (aliases, say) {
+  gu.handle(/^check (.*)$/, function (say, aliases) {
     aliases = aliases.trim().split(" ").slice(0, 8); // max 8 at a time
     curve.refresh(aliases, function (err, objs) {
       if (err) {
@@ -39,14 +39,14 @@ var queryHandlers = function (gu) {
     });
   });
 
-  gu.handle(/^top (\d*)$/, function (n, say) {
+  gu.handle(/^top (\d*)$/, function (say, n) {
     var top = curve.getTop(Math.min(n | 0, 15));
     top.forEach(function (p, i) {
       say((i+1) + '. ' + p.name + ' (' + p.score + ')');
     });
   });
 
-  gu.handle(/^teams (\d*) (.*)/, function (num, aliases, say) {
+  gu.handle(/^teams (\d*) (.*)/, function (say, num, aliases) {
     num = Math.max(Math.min(num | 0, 3), 1);
     aliases = aliases.trim().split(" ");
     var res = curve.fairestMatch(aliases);
@@ -76,7 +76,7 @@ var queryHandlers = function (gu) {
     'code' : 'displays the url of the code that powers this bot',
     'help' : 'this is the help for help'
   };
-  gu.handle(/^help(\s\w*)?/, function (cmd, say) {
+  gu.handle(/^help(\s\w*)?/, function (say, cmd) {
     cmd = (cmd || "").toLowerCase().trim();
     if (cmd && cmds[cmd]) {
       say(cmds[cmd]);
@@ -110,7 +110,7 @@ var signupHandlers = function (gu) {
   var added = [];  // currently signed up people
   var limit = 6;   // current limit
 
-  gu.handle(joinReg, function (sentiment, participant, say, name) {
+  gu.handle(joinReg, function (say, sentiment, participant, name) {
     var guy = participant || name;
     if (added.indexOf(guy) >= 0) {
       return; // no double signups
@@ -131,7 +131,7 @@ var signupHandlers = function (gu) {
     }
   });
 
-  gu.handle(leaveReg, function (sentiment, participant, say, name) {
+  gu.handle(leaveReg, function (say, sentiment, participant, name) {
     var guy = participant || name;
     if (added.indexOf(guy) >= 0) {
       added.splice(added.indexOf(guy), 1);
@@ -160,7 +160,7 @@ var signupHandlers = function (gu) {
     say('register on: ' + link + ' - then join: ' + room);
   });
 
-  gu.handle(/^limit (\d)/, function (n, say) {
+  gu.handle(/^limit (\d)/, function (say, n) {
     limit = Math.max(added.length, n | 0);
     say(added.length + ' / ' + limit);
     if (limit === added.length) {
