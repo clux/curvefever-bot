@@ -14,7 +14,7 @@
     "test": "tap test/*.js"
   },
   "dependencies": {
-    "curvefever-stats": "~0.0.2",
+    "curvefever-stats": "~0.1.0",
     "gu": "~0.2.0",
     "confortable": "~0.2.1"
   },

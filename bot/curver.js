@@ -172,13 +172,19 @@ var signupHandlers = function (gu) {
     say('game over' + (added.length > 1 ? ' - refreshing stats' : ''));
     if (added.length > 1) {
       curve.refresh(added, function () {});
-      curve.getLastMatch(added, function (err, scrs) {
+      curve.getLastMatch(added, function (err, res) {
         if (err) {
           return console.error(err);
         }
-        //console.log('getLastMatch returned:', scrs);
-        var isTeam = !!scrs[0].teamScore; // not set in FFAs
-        if (!isTeam) {
+        if (res.teamData) {
+          var w = res.teamData.winners;
+          var l = res.teamData.losers;
+          var wTeam = w.names.join(',') + ' [' + w.score + ' (' + w.sum + ')]';
+          var lTeam = l.names.join(',') + ' [' + l.score + ' (' + l.sum + ')]';
+          say(wTeam + ' >> ' + lTeam);
+        }
+        else {
+          var scrs = res.scores;
           var margin = scrs[0].score - scrs[1].score;
           var tbLen = scrs[0].score - (scrs.length-1)*10;
           var wasTb = (tbLen > 0 && scrs[1].score >= (scrs.length-1)*10);
@@ -187,42 +193,11 @@ var signupHandlers = function (gu) {
             '';
           say(scrs[0].name + ' won with a ' + margin + ' point margin' + tbStr);
         }
-        else {
-          // isTeam
-          // scrs sorted by winning team, then by individual score within teams
-          var wScore = scrs[0].teamScore;
-          var lScore = scrs[scrs.length-1].teamScore;
-          var winners = scrs.filter(function (s) {
-            return s.teamScore === wScore;
-          });
-          var losers = scrs.filter(function (s) {
-            return s.teamScore === lScore;
-          });
-          var wNames = winners.map(function (s) {
-            return s.name;
-          });
-          var lNames = losers.map(function (s) {
-            return s.name;
-          });
-          var wSum = winners.reduce(function (acc, s) {
-            return acc + s.score;
-          }, 0);
-          var lSum = losers.reduce(function (acc, s) {
-            return acc + s.score;
-          }, 0);
-          var wTeam = wNames.join(',') + ' [' + wScore + ' (' + wSum + ')]';
-          var lTeam = lNames.join(',') + ' [' + lScore + ' (' + lSum + ')]';
-
-          var resStr = wTeam + ' >> ' + lTeam;
-          say(resStr);
+        var mc = res.maxChange;
+        if (mc !== '0') {
+          say('Biggest rank shift: ' + mc.name + ' with ' + mc.rankChange + 'p');
         }
-        scrs.sort(function (x, y) {
-          return Math.abs(Number(y.rankChange)) - Math.abs(Number(x.rankChange));
-        });
-        if (scrs[0].rankChange !== '0') {
-          var maxChange = scrs[0].name + ' with ' + scrs[0].rankChange + 'p';
-          say('Biggest rank shift: ' + maxChange);
-        }
+        say("http://curvefever.com/achtung/match/" + res.id);
       });
     }
     added = [];
