@@ -70,6 +70,7 @@ test("signups", function (t) {
     t.equal(ys[12].message, 'Not generating teams: No player information for jo', 'jo not registered');
     t.equal(ys[13].message, 'game is full - say "limit n" to change the limit', 'failed signup');
     t.equal(ys[14].message, 'game over', 'end message');
+    // 2 lines of invite spam (15 - 16)
     t.equal(ys[17].message, 'ob joined (1 / 6)', 'new game counter reset');
     t.end();
   }, 10);

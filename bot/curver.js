@@ -169,8 +169,9 @@ var signupHandlers = function (gu) {
   });
 
   gu.handle(/^end(?:\s+(silent|quiet))?/, function (say, silent) {
-    say('game over' + (added.length > 1 && !silent? ' - refreshing stats' : ''));
-    if (added.length > 1 && !silent) {
+    var refresh = added.length > 1 && !silent;
+    say('game over' + (refresh ? ' - refreshing stats' : ''));
+    if (refresh) {
       curve.refresh(added, function () {});
       curve.getLastMatch(added, function (err, res) {
         if (err) {

@@ -7,7 +7,7 @@
     "type": "git",
     "url": "clux/curvefever-bot"
   },
-  "keywords": [],
+  "keywords": ["game", "signup", "scraper", "team", "generator", "bot"],
   "main": "curve-gu.js",
   "scripts": {
     "start": "node irc.js",

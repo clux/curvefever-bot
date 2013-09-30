@@ -5,13 +5,19 @@ Curvefever-bot is a bot interface for the [curvefever-stats](https://npmjs.org/p
 The library exposes a [gu](https://npmjs.org/package/gu) instance that you can create by just passing in the missing gu options. Then pipe your transports into it:
 
 ```javascript
-var curveBot = require('curvefever-bot').gu({});
+var curveBot = require('curvefever-bot').gu();
 var ircStream = require('irc-stream')(ircServer, ircName, ircOpts);
 
 ircStream.pipe(curveBot).pipe(ircStream);
 ```
 
 Alternatively, change the config file directly and run `npm start` for IRC mode.
+
+## Commands
+On IRC type `curve help` for help.
+
+## TODO
+When there are other transport streams available, implement bin files for them.
 
 ## License
 MIT-Licensed. See LICENSE file for details.
