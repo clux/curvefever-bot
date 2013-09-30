@@ -168,9 +168,9 @@ var signupHandlers = function (gu) {
     }
   });
 
-  gu.handle(/^end/, function (say) {
-    say('game over' + (added.length > 1 ? ' - refreshing stats' : ''));
-    if (added.length > 1) {
+  gu.handle(/^end(?:\s+(silent|quiet))?/, function (say, silent) {
+    say('game over' + (added.length > 1 && !silent? ' - refreshing stats' : ''));
+    if (added.length > 1 && !silent) {
       curve.refresh(added, function () {});
       curve.getLastMatch(added, function (err, res) {
         if (err) {

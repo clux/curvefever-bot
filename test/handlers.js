@@ -43,7 +43,7 @@ test("signups", function (t) {
     {user: '#chan:jo', name: 'jo', message: 'fine'},
     {user: '#chan:phil', name: 'phil', message: 'ok for ob'},
     // NB: "end" will trigger a HTTP GET, but we won't wait for its results
-    {user: '#chan:ob', name: 'ob', message: 'end'},
+    {user: '#chan:ob', name: 'ob', message: 'end quietly'},
     {user: '#chan:ob', name: 'ob', message: 'ja'}
   ];
   var ys = [];
@@ -69,7 +69,7 @@ test("signups", function (t) {
     t.equal(ys[11].message, 'curve game starting - clux, uu, aa, aj, jo - Go go go!', 'full => gogo');
     t.equal(ys[12].message, 'Not generating teams: No player information for jo', 'jo not registered');
     t.equal(ys[13].message, 'game is full - say "limit n" to change the limit', 'failed signup');
-    t.equal(ys[14].message, 'game over - refreshing stats', 'end message');
+    t.equal(ys[14].message, 'game over', 'end message');
     t.equal(ys[17].message, 'ob joined (1 / 6)', 'new game counter reset');
     t.end();
   }, 10);
