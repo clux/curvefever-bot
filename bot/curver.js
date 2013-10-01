@@ -92,16 +92,15 @@ var signupHandlers = function (gu) {
   var joinReg, leaveReg;
   (function () {
     var positives = [
-      'ye*s*h*z*i?r?', 'yu+p*[sz]*', 'ya+r*h*', 'ye+a*h*r*h*',
+      'ye*s*h*z*i?r?', 'y[ue]+p*[sz]*', 'ya+r*h*', 'ye+a*h*r*h*',
       'a+y+e*', 'j+a*', 'si', 'oui', 'okay', 'o?k+',
       'a?l?right', 'sure', 'fine', 'jawohl'
     ];
     var negatives = [
-      'ne+i+n*', 'na+[hw]*', 'n[ae]+[yi]+h*', 'n[uœ]+h*',
+      'n[ea]+i+n*', 'na+[hw]*', 'n[ae]+[yi]+h*', 'nu+h*',
       'no?p?e?', 'nowa[yi]?', 'never', 'later'
     ];
-    var straggler = '\\w{0,5}'; // allow some stray characters as well
-    var endForReg = straggler + '(?:\\s+fr?o[rm]?\\s*(\\w*))?'; // for|from|fo player
+    var endForReg = '(?:\\s+for\\s+(\\w*))?$'; // for player
     joinReg = new RegExp('^(' + positives.join('|') + ')' + endForReg, 'i');
     leaveReg = new RegExp('^(' + negatives.join('|') + ')' + endForReg, 'i');
   }());
@@ -168,7 +167,10 @@ var signupHandlers = function (gu) {
     }
   });
 
-  gu.handle(/^end(?:\s+(silent|quiet))?/, function (say, silent) {
+  gu.handle(/^end(?:\s+(silent|quiet))?/, function (say, silent, name) {
+    //if (added.indexOf(name) < 0 && (admins.length && admins.indexOf(name) < 0)) {
+    //  return; // only added players or admins can end the game
+    //}
     var refresh = added.length > 1 && !silent;
     say('game over' + (refresh ? ' - refreshing stats' : ''));
     if (refresh) {
