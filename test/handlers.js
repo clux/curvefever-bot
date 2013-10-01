@@ -1,35 +1,7 @@
 var tap = require('tap')
   , test = tap.test
-  , stream = require('stream')
   , Gu = require('gu')
   , guParams = require('../');
-
-/*
-// basic read stream that will emit data given
-function Pumper(objs) {
-  stream.Readable.call(this, {objectMode: true});
-  this.objs = objs;
-}
-Pumper.prototype = Object.create(stream.Readable.prototype);
-Pumper.prototype._read = function () {
-  this.push(this.objs.pop() || null);
-};
-
-// collect stream that will buffer on the other end
-function Collector(onFinish) {
-  stream.Writable.call(this, {objectMode: true});
-  this.objs = [];
-  this.on('finish', function () {
-    onFinish(this.objs);
-  });
-}
-Collector.prototype = Object.create(stream.Writable.prototype);
-Collector.prototype._write = function (obj, encoding, cb) {
-  console.log('received', obj.message);
-  this.objs.push(obj);
-  cb(null);
-};*/
-
 
 test("signups", function (t) {
   var curve = new Gu(guParams.scriptdir, guParams.files, {noReload: true});

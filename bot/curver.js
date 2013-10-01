@@ -176,20 +176,18 @@ var signupHandlers = function (gu) {
           return console.error(err);
         }
         if (res.teamData) {
-          var w = res.teamData.winners;
-          var l = res.teamData.losers;
-          var wTeam = w.names.join(',') + ' [' + w.score + ' (' + w.sum + ')]';
-          var lTeam = l.names.join(',') + ' [' + l.score + ' (' + l.sum + ')]';
+          var w = res.teamData.winners
+            , l = res.teamData.losers
+            , wTeam = w.names.join(',') + ' [' + w.score + ' (' + w.sum + ')]'
+            , lTeam = l.names.join(',') + ' [' + l.score + ' (' + l.sum + ')]';
           say(wTeam + ' >> ' + lTeam);
         }
         else {
-          var scrs = res.scores;
-          var margin = scrs[0].score - scrs[1].score;
-          var tbLen = scrs[0].score - (scrs.length-1)*10;
-          var wasTb = (tbLen > 0 && scrs[1].score >= (scrs.length-1)*10);
-          var tbStr = wasTb ?
-            ' after ' + tbLen + ' points of tiebreakers':
-            '';
+          var scrs = res.scores
+            , margin = scrs[0].score - scrs[1].score
+            , tbLen = scrs[0].score - (scrs.length-1)*10
+            , wasTb = (tbLen > 0 && scrs[1].score >= (scrs.length-1)*10)
+            , tbStr = wasTb ? ' after ' + tbLen + ' points of tiebreakers': '';
           say(scrs[0].name + ' won with a ' + margin + ' point margin' + tbStr);
         }
         var mc = res.maxChange;
