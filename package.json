@@ -2,12 +2,19 @@
   "name": "curvefever-bot",
   "description": "A curvefever signup and match making bot for your chat channel",
   "author": "Eirik Albrigtsen <analsandblaster@gmail.com>",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "type": "git",
     "url": "clux/curvefever-bot"
   },
-  "keywords": ["game", "signup", "scraper", "team", "generator", "bot"],
+  "keywords": [
+    "game",
+    "signup",
+    "scraper",
+    "team",
+    "generator",
+    "bot"
+  ],
   "main": "curve-gu.js",
   "scripts": {
     "start": "node irc.js",
