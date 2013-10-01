@@ -120,10 +120,6 @@ var signupHandlers = function (gu) {
       return;
     }
     added.push(guy);
-    if (added.length === 1) {
-      say('new curve game starting soon - message me "yes" to join');
-      say('register on: ' + link + ' - then join: ' + room);
-    }
     say(guy + ' joined (' + added.length + ' / ' + limit + ')');
     if (added.length === limit) {
       gogoFn(say);
@@ -156,7 +152,7 @@ var signupHandlers = function (gu) {
   gu.handle(/^gogo/, gogoFn);
 
   gu.handle(/^where|^link/, function (say) {
-    say('register on: ' + link + ' - then join: ' + room);
+    say('CurveFever2! Register at: ' + link + ' - then join: ' + room);
   });
 
   gu.handle(/^limit (\d)/, function (say, n) {
