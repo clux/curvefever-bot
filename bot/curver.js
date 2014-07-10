@@ -163,7 +163,11 @@ var signupHandlers = function (gu) {
     }
   });
 
-  gu.handle(/^end(?:\s+(silent|quiet))?/, function (say, silent, name) {
+  var startsWithVowel = function (n) {
+    return n === 11 || n === 18 || (n + '')[0] === '8';
+  };
+
+  gu.handle(/^end(?:\s+(silent|quiet))?/, function (say, silent/*, name*/) {
     //if (added.indexOf(name) < 0 && (admins.length && admins.indexOf(name) < 0)) {
     //  return; // only added players or admins can end the game
     //}
@@ -187,8 +191,9 @@ var signupHandlers = function (gu) {
             , margin = scrs[0].score - scrs[1].score
             , tbLen = scrs[0].score - (scrs.length-1)*10
             , wasTb = (tbLen > 0 && scrs[1].score >= (scrs.length-1)*10)
-            , tbStr = wasTb ? ' after ' + tbLen + ' points of tiebreakers': '';
-          say(scrs[0].name + ' won with a ' + margin + ' point margin' + tbStr);
+            , tbStr = wasTb ? ' after ' + tbLen + ' points of tiebreakers': ''
+            , an =  startsWithVowel(margin) ? 'an ' : 'a ';
+          say(scrs[0].name + ' won with ' + an + margin + ' point margin' + tbStr);
         }
         var mc = res.maxChange;
         if (mc !== '0') {
