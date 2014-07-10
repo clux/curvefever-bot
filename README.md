@@ -1,7 +1,9 @@
 # curvefever-bot
-[![Build Status](https://secure.travis-ci.org/clux/curvefever-bot.png)](http://travis-ci.org/clux/curvefever-bot)
-[![Dependency Status](https://david-dm.org/clux/curvefever-bot.png)](https://david-dm.org/clux/curvefever-bot)
-[![unstable](http://hughsk.github.io/stability-badges/dist/unstable.svg)](http://nodejs.org/api/documentation.html#documentation_stability_index)
+[![npm status](http://img.shields.io/npm/v/curvefever-bot.svg)](https://www.npmjs.org/package/curvefever-bot)
+[![build status](https://secure.travis-ci.org/clux/curvefever-bot.svg)](http://travis-ci.org/clux/curvefever-bot)
+[![dependency status](https://david-dm.org/clux/curvefever-bot.svg)](https://david-dm.org/clux/curvefever-bot)
+[![coverage status](http://img.shields.io/coveralls/clux/curvefever-bot.svg)](https://coveralls.io/r/clux/curvefever-bot)
+[![unstable](http://img.shields.io/badge/stability-unstable-E5AE13.svg)](http://nodejs.org/api/documentation.html#documentation_stability_index)
 
 Curvefever-bot is a bot interface for the [curvefever-stats](https://npmjs.org/package/curvefever-stats) package. You can hook this up to [irc-stream](http://npmjs.org/package/irc-stream) (say), and use it to sign up to games on IRC, as well as having it auto-generate fair teams for you, provided you have associated the player IRC nicknames with their curvefever nicknames.
 

@@ -1,9 +1,7 @@
-var tap = require('tap')
-  , test = tap.test
-  , Gu = require('gu')
+var Gu = require('gu')
   , guParams = require('../');
 
-test("signups", function (t) {
+exports.signups = function (t) {
   var curve = new Gu(guParams.scriptdir, guParams.files, {noReload: true});
   var xs = [
     {user: '#chan:clux', name: 'clux', message: 'buzz'},
@@ -48,6 +46,6 @@ test("signups", function (t) {
     t.equal(ys[15].message, 'ob joined (1 / 6)', 'new game counter reset');
     t.equal(ys[16].message, 'game over'); // no refresh, only one player
     //t.ok(!ys[16], 'no response to disallowed end found');
-    t.end();
+    t.done();
   }, 10);
-});
+};
